@@ -48,16 +48,16 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
 ```
 |-- src
 |   |-- main
-|   	|-- java
-|			|-- br
-|				|-- com
-|					|-- CSVReader.java
-|					|-- DAO.java
-|					|-- Main.java 
+|      |-- java
+|         |-- br
+|            |-- com
+|               |-- CSVReader.java
+|               |-- DAO.java
+|               |-- Main.java 
 |-- data
 |   |-- lista.csv
-|	.gitignore
-|	pom.xml
+|-- .gitignore
+|-- pom.xml
 |-- README.md
 ```
 
