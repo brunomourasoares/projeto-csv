@@ -1,6 +1,6 @@
 # Projeto de Inserção de Dados via CSV
 
-Este projeto permite a inserção de dados em uma tabela de banco de dados PostgreSQL a partir de um arquivo CSV. O usuário pode selecionar a tabela de destino e o arquivo CSV contendo os dados.
+Este projeto permite a inserção de dados em uma tabela de banco de dados PostgreSQL a partir de um arquivo CSV ou exportar os dados de toda tabela escolhida.
 
 ## ⚙️ Funcionalidades
 - Selecionar a tabela de destino no banco de dados.
@@ -41,6 +41,10 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
 
 6. Inicie:
     ```
+    Clique no botão Inserir Dados
+    ```
+7. Exportar:
+    ```
     Localize o arquivo CSV:
     ```
 
@@ -56,6 +60,7 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
 |               |-- Main.java 
 |-- data
 |   |-- lista.csv
+|   |-- query.sql
 |-- .gitignore
 |-- pom.xml
 |-- README.md

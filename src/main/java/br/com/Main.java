@@ -6,9 +6,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.util.List;
 
 public class Main extends JFrame {
@@ -16,6 +15,7 @@ public class Main extends JFrame {
     private JButton browseButton;
     private JComboBox<String> tableComboBox;
     private JButton submitButton;
+    private JButton exportButton;
 
     public Main() {
         setTitle("Inserir Dados CSV no Banco");
@@ -30,12 +30,14 @@ public class Main extends JFrame {
         browseButton = new JButton("Procurar");
         tableComboBox = new JComboBox<>();
         submitButton = new JButton("Inserir Dados");
+        exportButton = new JButton("Exportar Dados");
 
         // Customizing components
         filePathField.setPreferredSize(new Dimension(200, 25));
         filePathField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         Dimension buttonSize = new Dimension(150, 30);
         submitButton.setPreferredSize(buttonSize);
+        exportButton.setPreferredSize(buttonSize);
 
         // Adding components to the layout
         gbc.gridx = 0;
@@ -55,6 +57,9 @@ public class Main extends JFrame {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         add(submitButton, gbc);
+
+        gbc.gridy = 3;
+        add(exportButton, gbc);
 
         // Disable submit button initially
         submitButton.setEnabled(false);
@@ -95,6 +100,7 @@ public class Main extends JFrame {
         });
 
         submitButton.addActionListener(new SubmitButtonListener());
+        exportButton.addActionListener(new ExportButtonListener());
 
         loadTables();
     }
@@ -125,6 +131,34 @@ public class Main extends JFrame {
                 JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
             } catch (IOException | SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+            }
+        }
+    }
+
+    private class ExportButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String tableName = (String) tableComboBox.getSelectedItem();
+            if (tableName == null || tableName.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, selecione uma tabela.");
+                return;
+            }
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Text Files", "txt"));
+            int returnValue = fileChooser.showSaveDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                if (!file.getName().endsWith(".txt")) {
+                    file = new File(file.getAbsolutePath() + ".txt");
+                }
+
+                try {
+                    DAO.exportTableData(tableName, file);
+                    JOptionPane.showMessageDialog(null, "Dados exportados com sucesso!");
+                } catch (SQLException | IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+                }
             }
         }
     }

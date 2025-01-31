@@ -1,5 +1,9 @@
 package br.com;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +53,35 @@ public class DAO {
             }
         }
         return tables;
+    }
+
+    public static void exportTableData(String tableName, File file) throws SQLException, IOException {
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);
+             BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            for (int i = 1; i <= columnCount; i++) {
+                writer.write(metaData.getColumnName(i));
+                if (i < columnCount) {
+                    writer.write("#");
+                }
+            }
+            writer.newLine();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    writer.write(rs.getString(i));
+                    if (i < columnCount) {
+                        writer.write("#");
+                    }
+                }
+                writer.newLine();
+            }
+        }
     }
 
     private static boolean isSystemTable(String tableName) {
