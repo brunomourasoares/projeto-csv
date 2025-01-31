@@ -61,10 +61,13 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
 |-- data
 |   |-- lista.csv
 |   |-- query.sql
+|   |-- app.jpg
 |-- .gitignore
 |-- pom.xml
 |-- README.md
 ```
+![<Print>](https://raw.githubusercontent.com/brunomourasoares/projeto-csv/refs/heads/main/data/app.jpg)
+
 
 ## 🔧 Configuração do Banco de Dados
 Certifique-se de configurar a conexão com o banco de dados no arquivo `DAO.java`:
