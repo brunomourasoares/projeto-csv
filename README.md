@@ -45,7 +45,7 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
     ```
 7. Exportar:
     ```
-    Localize o arquivo CSV:
+    Localize o local para exportar o arquivo CSV:
     ```
 
 ## 📂 Estrutura do Projeto
