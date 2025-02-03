@@ -16,7 +16,7 @@ Este projeto permite a inserção de dados em uma tabela de banco de dados Postg
 1. Clone o repositório:
     ```bash
     git clone https://github.com/brunomourasoares/projeto-csv
-    cd nome-do-repositorio
+    cd projeto-csv
     ```
 
 2. Compile o projeto:
